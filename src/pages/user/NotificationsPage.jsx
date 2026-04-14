@@ -49,7 +49,7 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     if (!user?._id) return;
-    const socket = io("http://localhost:5000", { transports: ["websocket", "polling"] });
+    const socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000", { transports: ["websocket", "polling"] });
     socketRef.current = socket;
     socket.emit("join", { userId: user._id });
     socket.on("notification:new", () => load());
